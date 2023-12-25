@@ -18,6 +18,7 @@ typedef struct {
     char name[50];
     char type[50];
     float price;
+    char manufacturingDate[15];
     char expiryDate[15];
     int quantity;
 } Medicine;
@@ -32,9 +33,9 @@ int numMedicines = 0;
 void createCustomer();
 void updateCustomer();
 void deleteCustomer();
-void salesReport();
 void medicineStock();
-void customerReport();
+void salesReport();
+
 
 int main() {
     int choice;
@@ -44,10 +45,9 @@ int main() {
         printf("1. Create Customer\n");
         printf("2. Update Customer\n");
         printf("3. Delete Customer\n");
-        printf("4. Sales Report\n");
-        printf("5. Medicine Stock\n");
-        printf("6. Customer Report\n");
-        printf("7. Exit\n");
+        printf("4. Medicine Stock\n");
+        printf("5. Sales Report\n");
+        printf("6. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
@@ -61,16 +61,16 @@ int main() {
             case 3:
                 deleteCustomer();
                 break;
+            // case 4:
+            //     salesReport();
+            //     break;
             case 4:
-                salesReport();
-                break;
-            case 5:
                 medicineStock();
                 break;
-            case 6:
-                customerReport();
+            case 5:
+                salesReport();
                 break;
-            case 7:
+            case 6:
                 printf("Exiting the program. Thank you!\n");
                 exit(0);
             default:
@@ -141,20 +141,35 @@ void deleteCustomer() {
     printf("Customer ID not found. Deletion failed.\n");
 }
 
-// Function to display sales report
-void salesReport() {
-    // Write logic to display sales report
-    printf("Sales Report Functionality to be implemented.\n");
+// Function to display medicine stock - from supplier's database(list)
+void medicineStock() {
+    printf("\nMedicine Stock Details\n");
+    printf("-----------------------------------------------------\n");
+    printf("Medicine ID | Name          | Type          | Price | Manufacturing Date | Expiry Date\n");
+    printf("-----------------------------------------------------\n");
+    printf("01     Paracetamol      Tablet       100     12/11/2023   12/11/2026\n");
+    printf("02     CoughGel         Syrup        50      09/09/2023   15/08/2025\n");
+    printf("03     Cotton Crepe     Bandage      75      10/12/2023   15/12/2030\n");
+    printf("04     Zhandu Balm      Ointment     30      20/10/2023   20/04/2024\n");
+    printf("05     Crocin           Tablet       10      25/12/2023   20/05/2024\n");
+    printf("06     Insulin          Injection    300     18/10/2023   18/05/2024\n");
+    printf("07     Sinarest         Tablet       75      12/11/2023   12/11/2026\n");
+    printf("08     Cremaffin        Syrup        45      30/08/2023   30/02/2024\n");
+    printf("09     Volini           Spray        125     31/08/2023   31/04/2024\n");
+    printf("10     Surgical Mask    Mask         10      25/11/2023   ---\n");
+    
+    
+    for (int i = 0; i < numMedicines; i++) {
+        printf("%-11d | %-13s | %-13s | %.2f  | %-17s | %-11s\n",
+               medicines[i].medicineID, medicines[i].name, medicines[i].type,
+               medicines[i].price, medicines[i].manufacturingDate, medicines[i].expiryDate);
+    }
+    printf("-----------------------------------------------------\n");
 }
 
-// Function to display medicine stock
-void medicineStock() {
-    // Write logic to display medicine stock
-    printf("Medicine Stock Functionality to be implemented.\n");
-}
 
 // Function to display customer report
-void customerReport() {
+void salesReport() {
     // Write logic to display customer report
     printf("Customer Report Functionality to be implemented.\n");
 }
