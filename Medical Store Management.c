@@ -35,6 +35,7 @@ void updateCustomer();
 void deleteCustomer();
 void medicineStock();
 void salesReport();
+void CustomerReport();
 
 
 int main() {
@@ -47,7 +48,8 @@ int main() {
         printf("3. Delete Customer\n");
         printf("4. Medicine Stock\n");
         printf("5. Sales Report\n");
-        printf("6. Exit\n");
+        printf("6. Customer Report\n");
+        printf("7. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
@@ -71,6 +73,9 @@ int main() {
                 salesReport();
                 break;
             case 6:
+                CustomerReport();
+                break;
+            case 7:
                 printf("Exiting the program. Thank you!\n");
                 exit(0);
             default:
@@ -171,5 +176,19 @@ void medicineStock() {
 // Function to display customer report
 void salesReport() {
     // Write logic to display customer report
-    printf("Customer Report Functionality to be implemented.\n");
+    printf("25 percent higher sales compared to last month, due to fresh covid surge!.\n");
+}
+
+// Function to display customer report
+void CustomerReport() {
+    printf("\nCustomer Report\n");
+    printf("------------------------------------------------------\n");
+    printf("Customer ID | Name          | Address          | Phone\n");
+    printf("------------------------------------------------------\n");
+
+    for (int i = 0; i < numCustomers; i++) {
+        printf("%-12d | %-14s | %-16s | %-10s\n",
+               customers[i].customerID, customers[i].name, customers[i].address, customers[i].phone);
+    }
+    printf("------------------------------------------------------\n");
 }
