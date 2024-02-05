@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medical Store Management</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 1em;
+}
+
+section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+}
+
+input, select {
+    margin-bottom: 16px;
+    padding: 8px;
+}
+
+button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+#medicineList li {
+    list-style: none;
+    margin-bottom: 8px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+}
+
+#medicineList li span {
+    font-weight: bold;
+}
+
+#medicineList li button {
+    margin-top: 8px;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Medical Store Management</h1>
+</header>
+
+<section>
+    <h2>Add Medicine</h2>
+    <form id="medicineForm">
+        <label for="medicineName">Medicine Name:</label>
+        <input type="text" id="medicineName" name="medicineName" required>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" required>
+
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" required>
+
+        <label for="manufacturedDate">Manufactured Date:</label>
+        <input type="date" id="manufacturedDate" name="manufacturedDate" required>
+
+        <label for="expiryDate">Expiry Date:</label>
+        <input type="date" id="expiryDate" name="expiryDate" required>
+
+        <label for="companyName">Company Name:</label>
+        <input type="text" id="companyName" name="companyName" required>
+
+        <button type="button" onclick="addMedicine()">Add Medicine</button>
+    </form>
+</section>
+
+<section>
+    <h2>Medicine List</h2>
+    <ul id="medicineList"></ul>
+</section>
+
+<script>
+function addMedicine() {
+    const medicineForm = document.getElementById('medicineForm');
+    const medicineName = medicineForm.elements['medicineName'].value;
+    const quantity = medicineForm.elements['quantity'].value;
+    const price = medicineForm.elements['price'].value;
+    const manufacturedDate = medicineForm.elements['manufacturedDate'].value;
+    const expiryDate = medicineForm.elements['expiryDate'].value;
+    const companyName = medicineForm.elements['companyName'].value;
+
+    // Validation
+    if (!medicineName || !quantity || !price || !manufacturedDate || !expiryDate || !companyName) {
+        alert('Please fill in all fields.');
+        return;
+    }
+
+    const medicineList = document.getElementById('medicineList');
+    const listItem = document.createElement('li');
+    listItem.innerHTML = `
+        <span>${medicineName}</span> - 
+        Quantity: ${quantity}, 
+        Price: ${price},
+        Manufactured Date: ${manufacturedDate}, 
+        Expiry Date: ${expiryDate},
+        Company: ${companyName}
+        <button onclick="deleteMedicine(this)">Delete</button>
+    `;
+    medicineList.appendChild(listItem);
+
+    // Clear form fields
+    medicineForm.reset();
+}
+
+function deleteMedicine(button) {
+    const listItem = button.parentNode;
+    listItem.parentNode.removeChild(listItem);
+}
+</script>
+
+</body>
+</html>
